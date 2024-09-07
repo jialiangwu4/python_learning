@@ -9,12 +9,14 @@ class doubly_linked_list():
     def __init__(self):
         self.head = None
         self.tail = None
+        self.len = 0
 
     def is_empty(self):
         return not self.head
 
     def append_left(self, val):
         node = Node(val)
+        self.len += 1
         if self.is_empty():
             self.head = node
             self.tail = node
@@ -25,6 +27,7 @@ class doubly_linked_list():
 
     def append_right(self, val):
         node = Node(val)
+        self.len += 1
         if self.is_empty():
             self.head = node
             self.tail = node
@@ -38,6 +41,7 @@ class doubly_linked_list():
             raise IndexError('list is empty, nothing to pop')
 
         value = self.tail.value
+        self.len -= 1
 
         if self.head == self.tail:  # if has just one element in the list
             self.head = self.tail = None
@@ -52,6 +56,7 @@ class doubly_linked_list():
             raise IndexError('nothing to pop')
 
         value = self.head.value
+        self.len -= 1
 
         if self.head == self.tail:  # if has just one element in the list
             self.head = self.tail = None
@@ -60,6 +65,35 @@ class doubly_linked_list():
             self.head.left = None
 
         return value
+
+    def get_index_at(self, idx):
+        if self.is_empty():
+            raise IndexError('empty list')
+
+        if idx == 0:
+            return self.pop_left()
+        elif idx == -1 or idx == self.len:
+            return self.pop_right()
+        elif idx > 0:
+            i = 1
+            curr = self.head.right
+            while i != idx and curr:
+                curr = curr.right
+                i = i + 1
+        else:
+            i = -2
+            curr = self.tail.left
+            while i != idx and curr:
+                curr = curr.left
+                i = i - 1
+
+        if curr:
+            return curr.value
+        else:
+            raise IndexError('index out of range')
+
+    def lenth(self):
+        return self.len
 
     def __str__(self):
         curr = self.head
@@ -87,6 +121,14 @@ if __name__ == '__main__':
     dll.append_right(9)
 
     print(dll)
-    print(dll.pop_left())
-    print(dll.pop_right())
+    print(dll.lenth())
+    print('get index at 2: ', dll.get_index_at(8))
+    print('pop left: ', dll.pop_left())
+    print(dll)
+    print('get index at 2: ', dll.get_index_at(2))
+    print(dll)
+    print('get index at -2: ', dll.get_index_at(-2))
+    print('pop right: ', dll.pop_right())
+    print(dll)
+    print(dll.lenth())
     print(dll.is_empty())
