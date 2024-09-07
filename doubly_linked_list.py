@@ -19,9 +19,9 @@ class doubly_linked_list():
             self.head = node
             self.tail = node
         else:
-            self.tail.right = node  # point the last node's right to the new node
-            node.left = self.tail   # point the new node's left to the last node
-            self.tail = node        # set the new node as the tail
+            self.head.left = node   # point the first node's left to the new node
+            node.right = self.head  # point the new node's right to the first node
+            self.head = node        # set the new node as the head
 
     def append_right(self, val):
         node = Node(val)
@@ -29,9 +29,9 @@ class doubly_linked_list():
             self.head = node
             self.tail = node
         else:
-            self.head.left = node   # point the first node's left to the new node
-            node.right = self.head  # point the new node's right to the first node
-            self.head = node        # set the new node as the tail
+            self.tail.right = node  # point the last node's right to the new node
+            node.left = self.tail   # point the new node's left to the last node
+            self.tail = node        # set the new node as the tail
 
     def pop_right(self):
         if self.is_empty():
@@ -49,7 +49,7 @@ class doubly_linked_list():
 
     def pop_left(self):
         if self.is_empty():
-            raise IndentationError('nothing to pop')
+            raise IndexError('nothing to pop')
 
         value = self.head.value
 
@@ -74,4 +74,19 @@ class doubly_linked_list():
 
 if __name__ == '__main__':
     dll = doubly_linked_list()
+    print(dll.is_empty())
+    dll.append_left(1)
+    dll.append_left(2)
+    dll.append_left(3)
+    dll.append_left(4)
+    dll.append_left(5)
+
+    dll.append_right(6)
+    dll.append_right(7)
+    dll.append_right(8)
+    dll.append_right(9)
+
+    print(dll)
     print(dll.pop_left())
+    print(dll.pop_right())
+    print(dll.is_empty())
