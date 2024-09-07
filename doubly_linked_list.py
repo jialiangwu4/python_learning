@@ -1,11 +1,11 @@
-class Node():
-    def __init__(self, val):
-        self.left = None
-        self.value = val
-        self.right = None
-
 
 class doubly_linked_list():
+    class Node():
+        def __init__(self, val):
+            self.left = None
+            self.value = val
+            self.right = None
+
     def __init__(self):
         self.head = None
         self.tail = None
@@ -15,7 +15,7 @@ class doubly_linked_list():
         return not self.head
 
     def append_left(self, val):
-        node = Node(val)
+        node = self.Node(val)
         self.len += 1
         if self.is_empty():
             self.head = node
@@ -26,7 +26,7 @@ class doubly_linked_list():
             self.head = node        # set the new node as the head
 
     def append_right(self, val):
-        node = Node(val)
+        node = self.Node(val)
         self.len += 1
         if self.is_empty():
             self.head = node
@@ -74,6 +74,7 @@ class doubly_linked_list():
             return self.pop_left()
         elif idx == -1 or idx == self.len:
             return self.pop_right()
+
         elif idx > 0:
             i = 1
             curr = self.head.right
