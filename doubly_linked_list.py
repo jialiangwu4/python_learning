@@ -70,20 +70,15 @@ class doubly_linked_list():
         if self.is_empty():
             raise IndexError('empty list')
 
-        if idx == 0:
-            return self.pop_left()
-        elif idx == -1 or idx == self.len:
-            return self.pop_right()
-
-        elif idx > 0:
-            i = 1
-            curr = self.head.right
+        if idx >= 0:
+            i = 0
+            curr = self.head
             while i != idx and curr:
                 curr = curr.right
                 i = i + 1
         else:
-            i = -2
-            curr = self.tail.left
+            i = -1
+            curr = self.tail
             while i != idx and curr:
                 curr = curr.left
                 i = i - 1
@@ -123,7 +118,7 @@ if __name__ == '__main__':
 
     print(dll)
     print(dll.lenth())
-    print('get index at 2: ', dll.get_index_at(8))
+    print('get index at -5: ', dll.get_index_at(-5))
     print('pop left: ', dll.pop_left())
     print(dll)
     print('get index at 2: ', dll.get_index_at(2))
